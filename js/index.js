@@ -58,5 +58,10 @@ async function getResults() {
     }
     
 }
-searchBtnEl.addEventListener("click", getResults);
+searchBtnEl.addEventListener('click', getResults )
+document.addEventListener('keyup', (e) => {
+    if(e.keyCode == 13){
+        getResults()
+    }
+});
 
