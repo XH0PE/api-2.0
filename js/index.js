@@ -3,11 +3,11 @@ const searchBtnEl = document.querySelector(".btnBusqueda");
 const result = document.querySelector(".resultado");
 
 async function getResults() {
-    let countryName = inputEl.Value;
+    let countryName = inputEl.value.trim();
     try {
         result.innerHTML = `<h2 class="loading">Cargando Resultados ... </h2>`;
         let fetchUrl = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
-        let data = await fetch(fetchUrl).then((res) => res.json());
+        let data = await (await fetch(fetchUrl)).json();
 
         result.innerHTML = `
         <img src="${data[0].flags.svg}" class="flag-img">
@@ -27,7 +27,7 @@ async function getResults() {
         <div class="wrapper">
         <div class="data-wrapper">
         <h4>Poblacion:</h4>
-        <span>${data[0].population[0]}</span>
+        <span>${data[0].population}</span>
         </div>
         </div>
         <div class="wrapper">
@@ -47,6 +47,7 @@ async function getResults() {
         </div>
         </div>
         `;
+        console.log(data[0].population);
     }
 
     catch (error) {
